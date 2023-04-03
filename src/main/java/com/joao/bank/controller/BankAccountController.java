@@ -1,6 +1,7 @@
 package com.joao.bank.controller;
 
 import java.net.URI;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -25,8 +26,8 @@ public class BankAccountController {
 	 private BankAccountService bankAccountService;
 
 	 @PostMapping("/{idBankAccount}/deposits")
-	 public ResponseEntity<Void> toDeposit(@PathVariable String idBankAccount, @RequestBody String ammount) {
-		 double numericAmmount = Double.parseDouble(ammount);
+	 public ResponseEntity<Void> toDeposit(@PathVariable String idBankAccount,@RequestBody Map<String, Object> requestBody) {
+		 double numericAmmount = Double.parseDouble(requestBody.get("ammount").toString());
 		 bankAccountService.toDeposit(idBankAccount, numericAmmount);
 	     return ResponseEntity.noContent().build();
 	 }
